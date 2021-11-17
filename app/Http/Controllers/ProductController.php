@@ -24,6 +24,17 @@ class ProductController extends Controller
         return json_decode(Product::all());
     }
 
+    public function search2($search){
+        if($search){ 
+            $produtos = Product::where('name', 'like', "%$search%")->get();
+            return response()->json($produtos);
+            
+        }else{
+            return Product::all();
+        }
+
+    }
+
     public function select($cat_id){
         $produtos = Product::where(['category_id' => $cat_id])->get();
         return $produtos;
